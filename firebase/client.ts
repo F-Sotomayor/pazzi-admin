@@ -17,6 +17,7 @@ export default new Proxy(
   },
   {
     get: function (target, name: FirebaseService) {
+      console.log(process.env);
       if (!firebase.apps.length) {
         firebase.initializeApp({
           apiKey: process.env.FIREBASE_API_KEY,

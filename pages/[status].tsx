@@ -1,11 +1,12 @@
 import React from "react";
 import {GetServerSideProps} from "next";
-import {Stack} from "@chakra-ui/react";
+import {Button, Stack} from "@chakra-ui/react";
 
 import serverApi from "../product/api/server";
 import {Order} from "../product/types";
 import TableContent from "../components/Table/TableContent";
 import TableFilters from "../components/Table/Filters";
+import clientApi from "../product/api/client";
 
 interface Props {
   orders: Order[];
@@ -14,42 +15,24 @@ interface Props {
 const IndexPage: React.FC<Props> = ({orders}) => {
   const [selected, setSelected] = React.useState([]);
 
-  function onChange(event) {
-    if (event.target.checked) {
-      setSelected(selected.concat(event));
-    } else {
-      setSelected(selected.filter((item) => item.target.id !== event.target.id));
-    }
+  function handleSelectSubmit(value: string) {
+    clientApi.move(selected, value).then(() => window.location.reload());
   }
-
-  function handleSelect(event) {
-    console.log(event.target.value);
-  }
-
-  function handleSelectSubmit(event) {
-    selected.map((item) => {
-      if (
-        (item.target.id = orders.map((test) => {
-          test.id;
-        }))
-      ) {
-        console.log("it matches");
-      } else {
-        console.log("no match");
-      }
-    });
-  }
-  console.log(selected);
 
   return (
     <>
       <Stack height="auto" maxWidth="100%" minHeight="100vh" padding={4} width="100vw">
-        <TableFilters
-          handleSelect={handleSelect}
-          handleSelectSubmit={handleSelectSubmit}
-          selected={selected}
-        />
-        <TableContent orders={orders} selected={selected} onChange={onChange} />
+        <TableFilters onSubmit={handleSelectSubmit}>
+          {({form, submit}) => (
+            <Stack>
+              {form}
+              <Button colorScheme="blue" margin="auto" marginTop={2} w={256} onClick={submit}>
+                Mover
+              </Button>
+            </Stack>
+          )}
+        </TableFilters>
+        <TableContent orders={orders} value={selected} onChange={setSelected} />
       </Stack>
     </>
   );

@@ -6,11 +6,19 @@ import {Order} from "../../product/types";
 
 interface Props {
   orders: Order[];
-  selected;
-  onChange;
+  value: string[];
+  onChange: (value: Props["value"]) => void;
 }
 
-const TableContent: React.FC<Props> = ({orders, selected, onChange}) => {
+const TableContent: React.FC<Props> = ({orders, value, onChange}) => {
+  function handleChange(checked, id) {
+    if (checked) {
+      onChange(value.concat(id));
+    } else {
+      onChange(value.filter((item) => item !== id));
+    }
+  }
+
   return (
     <Table colorScheme="blue" marginTop={4} variant="simple">
       <Thead>
@@ -31,9 +39,8 @@ const TableContent: React.FC<Props> = ({orders, selected, onChange}) => {
                 <Checkbox
                   border="1px solid gray"
                   borderRadius={2}
-                  checked={false}
-                  id={order.id}
-                  onChange={onChange}
+                  checked={value.includes(order.id)}
+                  onChange={(event) => handleChange(event.target.checked, order.id)}
                 />
               </Td>
               <Td>{order.email}</Td>

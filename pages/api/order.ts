@@ -1,29 +1,31 @@
 import {NextApiRequest, NextApiResponse} from "next";
 
-import {CartItem} from "../../product/types";
 import serverApi from "../../product/api/server";
 import {auth} from "../../firebase/admin";
 
-interface PostRequest extends NextApiRequest {
-  body: CartItem[];
+interface PatchRequest extends NextApiRequest {
+  body: {orders: string[]; status: string};
   headers: {
     authorization: string;
   };
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-  if (req.method === "POST") {
-    const {body: order, headers} = req as PostRequest;
+  if (req.method === "PATCH") {
+    const {
+      body: {orders, status},
+      headers,
+    } = req as PatchRequest;
 
     return auth
       .verifyIdToken(headers.authorization)
-      .then(async (user) => {
-        const result = await serverApi.order(order, user.email);
+      .then(async () => {
+        await serverApi.move(orders, status);
 
-        res.status(200).json(result);
+        return res.status(200).end();
       })
-      .catch(() => {
-        res.status(401).end();
+      .catch((error) => {
+        return res.status(401).end();
       });
   }
 };

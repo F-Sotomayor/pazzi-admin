@@ -9,4 +9,14 @@ export default {
         Authorization: window.localStorage.getItem("token"),
       },
     }),
+  move: (orders: string[], status: string): Promise<void> =>
+    axios.patch(
+      "/api/order",
+      {orders, status},
+      {
+        headers: {
+          Authorization: window.localStorage.getItem("token"),
+        },
+      },
+    ),
 };
