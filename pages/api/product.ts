@@ -2,9 +2,10 @@ import {NextApiRequest, NextApiResponse} from "next";
 
 import serverApi from "../../product/api/server";
 import {auth} from "../../firebase/admin";
+import {Product} from "../../product/types";
 
 interface PatchRequest extends NextApiRequest {
-  body: {orders: string[]; status: string};
+  body: {id: Product["id"]; stock: number};
   headers: {
     authorization: string;
   };
@@ -13,14 +14,14 @@ interface PatchRequest extends NextApiRequest {
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   if (req.method === "PATCH") {
     const {
-      body: {orders, status},
+      body: {id, stock},
       headers,
     } = req as PatchRequest;
 
     return auth
       .verifyIdToken(headers.authorization)
       .then(async () => {
-        await serverApi.order.move(orders, status);
+        await serverApi.product.stock.update(id, stock);
 
         return res.status(200).end();
       })

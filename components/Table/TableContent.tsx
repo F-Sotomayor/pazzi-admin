@@ -4,6 +4,8 @@ import {format} from "date-fns";
 
 import {Order} from "../../product/types";
 
+import {getOrderTotal} from "./selectors";
+
 interface Props {
   orders: Order[];
   value: string[];
@@ -32,7 +34,7 @@ const TableContent: React.FC<Props> = ({orders, value, onChange}) => {
         </Tr>
       </Thead>
       <Tbody>
-        {orders.map((order) => {
+        {orders.map((order: Order) => {
           return (
             <Tr key={order.id}>
               <Td>
@@ -46,15 +48,15 @@ const TableContent: React.FC<Props> = ({orders, value, onChange}) => {
               <Td>{order.email}</Td>
               <Td>{format(order.date, "MM/dd/yyyy / HH:mm:ss")}</Td>
               <Td>
-                {order.order.map((test) => {
+                {order.order.map((item) => {
                   return (
-                    <Box key={test.id}>
+                    <Box key={item.id}>
                       <Badge colorScheme="blue" marginY="0.25rem">
-                        {test.title}
+                        {item.title}
                       </Badge>
-                      {test.presentations.map((presentation) => {
+                      {item.presentations.map((presentation, index) => {
                         return (
-                          <Box key={presentation.count * presentation.units * presentation.price}>
+                          <Box key={index}>
                             <Text>
                               Pack: {presentation.count} : {presentation.units}
                             </Text>
@@ -65,7 +67,7 @@ const TableContent: React.FC<Props> = ({orders, value, onChange}) => {
                   );
                 })}
               </Td>
-              <Td>$12.123</Td>
+              <Td>{getOrderTotal(order)}</Td>
               <Td>
                 <Badge
                   alignItems="center"

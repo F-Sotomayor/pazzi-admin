@@ -1,22 +1,32 @@
 import axios from "axios";
 
-import {CartItem} from "../types";
+import {Product} from "../types";
 
 export default {
-  order: (items: CartItem[]): Promise<void> =>
-    axios.post("/api/order", items, {
-      headers: {
-        Authorization: window.localStorage.getItem("token"),
-      },
-    }),
-  move: (orders: string[], status: string): Promise<void> =>
-    axios.patch(
-      "/api/order",
-      {orders, status},
-      {
-        headers: {
-          Authorization: window.localStorage.getItem("token"),
+  order: {
+    move: (orders: string[], status: string): Promise<void> =>
+      axios.patch(
+        "/api/order",
+        {orders, status},
+        {
+          headers: {
+            Authorization: window.localStorage.getItem("token"),
+          },
         },
-      },
-    ),
+      ),
+  },
+  product: {
+    stock: {
+      update: (id: Product["id"], stock: number): Promise<void> =>
+        axios.patch(
+          "/api/product",
+          {id, stock},
+          {
+            headers: {
+              Authorization: window.localStorage.getItem("token"),
+            },
+          },
+        ),
+    },
+  },
 };
