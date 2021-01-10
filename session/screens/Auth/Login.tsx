@@ -100,7 +100,6 @@ const LoginScreen: React.FC<Props> = ({navigate}) => {
               name="password"
               placeholder="********"
               rules={{required: true}}
-              size="lg"
               tabIndex={2}
             />
             <FormErrorMessage>
