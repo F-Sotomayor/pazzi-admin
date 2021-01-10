@@ -22,7 +22,7 @@ export interface Order {
   date: number;
   order: CartItem[];
   email: string;
-  status: "pending" | "completed" | "cancelled";
+  status: "pending" | "completed" | "cancelled" | "daily";
 }
 
 export interface ClientTenant {

@@ -7,7 +7,7 @@ const Header = () => {
       <Heading color="primary.800" letterSpacing={4} marginBottom={4} marginTop={4}>
         PANEL DE ADMINISTRACTION
       </Heading>
-      <Flex direction="row" justify="space-evenly" width="700px">
+      <Flex direction="row" justify="space-evenly" width="1000px">
         <Link href="/cancelled">
           <Text color="primary.800" fontSize={20} fontWeight={500}>
             <Button colorScheme="blue">Pedidos Cancelados</Button>
@@ -21,6 +21,11 @@ const Header = () => {
         <Link href="/completed">
           <Text color="primary.800" fontSize={20} fontWeight={500}>
             <Button colorScheme="blue">Pedidos Completados</Button>
+          </Text>
+        </Link>
+        <Link href="/daily">
+          <Text color="primary.800" fontSize={20} fontWeight={500}>
+            <Button colorScheme="blue">Pedidos para Imprimir</Button>
           </Text>
         </Link>
         <Link href="/products">

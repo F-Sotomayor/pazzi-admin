@@ -39,12 +39,11 @@ const ProductsPage: React.FC<Props> = ({products}) => {
                 <Td>
                   <ProductStockForm product={product.id} onSubmit={handleSubmit}>
                     {({form, submit, value}) => (
-                      <Stack direction="row">
+                      <Stack direction="row" justify="space-between">
                         {form}
                         <Button
-                          colorScheme="blue"
+                          colorScheme={`${!value ? "red" : "blue"}`}
                           isDisabled={!value || isLoading}
-                          margin="auto"
                           marginTop={2}
                           w={256}
                           onClick={submit}

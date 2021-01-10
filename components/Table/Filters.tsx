@@ -28,6 +28,7 @@ const TableFilters: React.FC<Props> = ({onSubmit, children}) => {
         <option value="cancelled">Pedidos Cancelados</option>
         <option value="pending">Pedidos Pendientes</option>
         <option value="completed">Pedidos Completados</option>
+        <option value="daily">Pedidos para Imprimir</option>
       </Select>
     ),
     submit: handleSubmit,

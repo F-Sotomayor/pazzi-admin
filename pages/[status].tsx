@@ -1,12 +1,14 @@
 import React from "react";
 import {GetServerSideProps} from "next";
-import {Button, Heading, Stack} from "@chakra-ui/react";
+import {Button, Flex, Heading, Stack} from "@chakra-ui/react";
 
 import serverApi from "../product/api/server";
 import {Order} from "../product/types";
 import TableContent from "../components/Table/TableContent";
 import TableFilters from "../components/Table/Filters";
 import clientApi from "../product/api/client";
+
+import order from "./api/order";
 
 interface Props {
   orders: Order[];
@@ -20,7 +22,7 @@ const IndexPage: React.FC<Props> = ({orders}) => {
       return;
     }
 
-    clientApi.move(selected, value).then(() => window.location.reload());
+    clientApi.order.move(selected, value).then(() => window.location.reload());
   }
 
   return (
@@ -51,6 +53,13 @@ const IndexPage: React.FC<Props> = ({orders}) => {
           </TableFilters>
         )}
         <TableContent orders={orders} value={selected} onChange={setSelected} />
+        {orders.length && (
+          <Flex h="auto" justify="center" marginTop={4} w="100%">
+            <Button colorScheme="blue" w={258} onClick={(e) => window.print()}>
+              Imprimir
+            </Button>
+          </Flex>
+        )}
       </Stack>
     </>
   );
