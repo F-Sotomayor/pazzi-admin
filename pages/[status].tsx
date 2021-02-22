@@ -27,7 +27,14 @@ const IndexPage: React.FC<Props> = ({orders}) => {
 
   return (
     <>
-      <Stack height="auto" maxWidth="100%" minHeight="100vh" padding={4} width="100vw">
+      <Stack
+        height="auto"
+        maxWidth="100%"
+        minHeight="100vh"
+        overflowX={{base: "scroll"}}
+        padding={4}
+        width="100vw"
+      >
         {selected.length && (
           <TableFilters onSubmit={handleSelectSubmit}>
             {({form, submit, value}) => (
