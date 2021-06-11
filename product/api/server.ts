@@ -31,12 +31,12 @@ export default {
         .then((snapshot) => snapshot.docs.map((doc) => ({...(doc.data() as Product), id: doc.id})));
     },
     stock: {
-      update: async (id: Product["id"], stock: number): Promise<void> => {
+      update: async (id: Product["id"], price: number): Promise<void> => {
         database
           .collection("products")
           .doc(id)
           .update({
-            stock: firestore.FieldValue.increment(stock),
+            price: firestore.FieldValue.increment(price),
           });
       },
     },

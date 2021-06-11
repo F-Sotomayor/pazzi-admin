@@ -18,39 +18,39 @@ const Header = () => {
         direction={{base: "column", lg: "row"}}
         height={{base: "50vh"}}
         justify="space-evenly"
-        width={{base: "100%", lg: "1000px"}}
+        width={{base: "100%", lg: "90vw"}}
       >
         <Link href="/cancelled">
           <Text color="primary.800" fontSize={20} fontWeight={500}>
-            <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px"}}>
+            <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px", lg: "15vw"}}>
               Pedidos Cancelados
             </Button>
           </Text>
         </Link>
         <Link href="/pending">
           <Text color="primary.800" fontSize={20} fontWeight={500}>
-            <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px"}}>
+            <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px", lg: "15vw"}}>
               Pedidos Pendientes
             </Button>
           </Text>
         </Link>
         <Link href="/completed">
           <Text color="primary.800" fontSize={20} fontWeight={500}>
-            <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px"}}>
+            <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px", lg: "15vw"}}>
               Pedidos Completados
             </Button>
           </Text>
         </Link>
         <Link href="/daily">
           <Text color="primary.800" fontSize={20} fontWeight={500}>
-            <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px"}}>
+            <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px", lg: "15vw"}}>
               Pedidos para Imprimir
             </Button>
           </Text>
         </Link>
         <Link href="/products">
           <Text color="primary.800" fontSize={20} fontWeight={500}>
-            <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px"}}>
+            <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px", lg: "15vw"}}>
               Productos
             </Button>
           </Text>

@@ -3,10 +3,13 @@ export interface Product {
   title: string;
   description: string;
   stock: number;
+  test: string;
+  type: string;
   presentations: Presentation[];
 }
 
 export interface Presentation {
+  id2: string;
   units: number;
   price: number;
 }
