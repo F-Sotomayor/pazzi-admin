@@ -1,11 +1,12 @@
-import {Input, Select} from "@chakra-ui/react";
+import {Input} from "@chakra-ui/react";
 import React from "react";
 
-import {Product} from "../types";
+import {Presentation, Product} from "../types";
 
 interface Props {
-  onSubmit: (product: Product["id"], value: number) => void;
+  onSubmit: (product: Product["id"], value: number, presentationId: Presentation["id"]) => void;
   product: Product["id"];
+  presentation: Presentation["id"];
   children: (options: {
     form: JSX.Element;
     submit: VoidFunction;
@@ -13,11 +14,11 @@ interface Props {
   }) => JSX.Element;
 }
 
-const ProductStockForm: React.FC<Props> = ({onSubmit, children, product}) => {
+const ProductStockForm: React.FC<Props> = ({onSubmit, children, product, presentation}) => {
   const [value, setValue] = React.useState<number>(undefined);
 
   function handleSubmit() {
-    onSubmit(product, value);
+    onSubmit(product, value, presentation);
   }
 
   return children({

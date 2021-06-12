@@ -9,7 +9,7 @@ export interface Product {
 }
 
 export interface Presentation {
-  id2: string;
+  id: string;
   units: number;
   price: number;
 }

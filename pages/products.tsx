@@ -18,7 +18,7 @@ import {GetServerSideProps} from "next";
 import React from "react";
 
 import serverApi from "../product/api/server";
-import {Product} from "../product/types";
+import {Presentation, Product} from "../product/types";
 import clientApi from "../product/api/client";
 import ProductStockForm from "../product/forms/Stock";
 
@@ -29,9 +29,9 @@ interface Props {
 const ProductsPage: React.FC<Props> = ({products}) => {
   const [isLoading, toggleLoading] = React.useState(false);
 
-  function handleSubmit(id: Product["id"], value: number) {
+  function handleSubmit(id: Product["id"], value: number, presentationId: Presentation["id"]) {
     toggleLoading(true);
-    clientApi.product.stock.update(id, value).then(() => window.location.reload());
+    clientApi.product.stock.update(id, value, presentationId).then(() => window.location.reload());
   }
 
   return (
@@ -93,7 +93,7 @@ const ProductsPage: React.FC<Props> = ({products}) => {
                   {product.presentations.map((presentation, presentationIndex) => {
                     return (
                       <Flex
-                        key={presentation.units}
+                        key={presentation.id}
                         alignItems="center"
                         justifyContent="space-between"
                         width="100%"
@@ -113,7 +113,11 @@ const ProductsPage: React.FC<Props> = ({products}) => {
                           })}
                         </Text>
                         <Box display="flex" flex={0.33} justifyContent="center">
-                          <ProductStockForm product={product.id} onSubmit={handleSubmit}>
+                          <ProductStockForm
+                            presentation={presentation.id}
+                            product={product.id}
+                            onSubmit={handleSubmit}
+                          >
                             {({form, submit, value}) => (
                               <Stack direction="row" justify="space-between">
                                 {form}

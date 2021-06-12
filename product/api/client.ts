@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import {Product} from "../types";
+import {Presentation, Product} from "../types";
 
 export default {
   order: {
@@ -17,10 +17,14 @@ export default {
   },
   product: {
     stock: {
-      update: (id: Product["id"], stock: number): Promise<void> =>
+      update: (
+        id: Product["id"],
+        stock: number,
+        presentationId: Presentation["id"],
+      ): Promise<void> =>
         axios.patch(
           "/api/product",
-          {id, stock},
+          {id, stock, presentationId},
           {
             headers: {
               Authorization: window.localStorage.getItem("token"),

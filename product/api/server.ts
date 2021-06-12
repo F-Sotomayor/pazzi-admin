@@ -1,5 +1,5 @@
 import {database, firestore} from "../../firebase/admin";
-import {CartItem, Order, Product} from "../types";
+import {CartItem, Order, Presentation, Product} from "../types";
 
 export default {
   order: {
@@ -31,7 +31,11 @@ export default {
         .then((snapshot) => snapshot.docs.map((doc) => ({...(doc.data() as Product), id: doc.id})));
     },
     stock: {
-      update: async (id: Product["id"], price: number): Promise<void> => {
+      update: async (
+        id: Product["id"],
+        price: number,
+        presentationId: Presentation["id"],
+      ): Promise<void> => {
         database
           .collection("products")
           .doc(id)
