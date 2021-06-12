@@ -17,14 +17,10 @@ export default {
   },
   product: {
     stock: {
-      update: (
-        id: Product["id"],
-        stock: number,
-        presentationId: Presentation["id"],
-      ): Promise<void> =>
+      update: (id: Product["id"], presentations: Presentation[]): Promise<void> =>
         axios.patch(
           "/api/product",
-          {id, stock, presentationId},
+          {id, presentations},
           {
             headers: {
               Authorization: window.localStorage.getItem("token"),

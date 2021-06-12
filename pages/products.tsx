@@ -28,10 +28,12 @@ interface Props {
 
 const ProductsPage: React.FC<Props> = ({products}) => {
   const [isLoading, toggleLoading] = React.useState(false);
+  const [presentations, setPresentations] = React.useState([]);
 
-  function handleSubmit(id: Product["id"], value: number, presentationId: Presentation["id"]) {
+  function handleSubmit(id: Product["id"], presentations: Presentation[]) {
     toggleLoading(true);
-    clientApi.product.stock.update(id, value, presentationId).then(() => window.location.reload());
+    clientApi.product.stock.update(id, presentations).then(() => window.location.reload());
+    console.log(id, presentations);
   }
 
   return (
@@ -83,61 +85,40 @@ const ProductsPage: React.FC<Props> = ({products}) => {
                       Precio
                     </Text>
                   </Box>
-                  <Box display="flex" flex={0.33} justifyContent="center">
-                    <Text fontSize="xs" fontWeight={500} textAlign="left" textTransform="uppercase">
-                      Nuevo Precio
-                    </Text>
-                  </Box>
                 </Flex>
                 <Stack divider={<StackDivider />} spacing={1}>
                   {product.presentations.map((presentation, presentationIndex) => {
                     return (
                       <Flex
-                        key={presentation.id}
+                        key={presentation.units}
                         alignItems="center"
                         justifyContent="space-between"
                         width="100%"
                       >
-                        <Text flex={0.2} fontSize={[12, 12, 12, 16]}>
+                        <Text flex={0.5} fontSize={[12, 12, 12, 16]}>
                           {presentation.units} unidad(es)
                         </Text>
-                        <Text
-                          display="flex"
-                          flex={0.33}
-                          fontSize={[12, 12, 12, 16]}
-                          justifyContent="center"
-                        >
-                          {presentation.price.toLocaleString("es-AR", {
-                            style: "currency",
-                            currency: "ARS",
-                          })}
+                        <Text flex={0.5}>
+                          <Input
+                            placeholder={presentation.price}
+                            onChange={(e) => {
+                              presentation.price = Number(e.target.value);
+                              setPresentations(product.presentations);
+                            }}
+                          />
                         </Text>
-                        <Box display="flex" flex={0.33} justifyContent="center">
-                          <ProductStockForm
-                            presentation={presentation.id}
-                            product={product.id}
-                            onSubmit={handleSubmit}
-                          >
-                            {({form, submit, value}) => (
-                              <Stack direction="row" justify="space-between">
-                                {form}
-                                <Button
-                                  colorScheme={`${!value ? "red" : "blue"}`}
-                                  isDisabled={!value || isLoading}
-                                  marginTop={2}
-                                  w={256}
-                                  onClick={submit}
-                                >
-                                  Actualizar
-                                </Button>
-                              </Stack>
-                            )}
-                          </ProductStockForm>
-                        </Box>
                       </Flex>
                     );
                   })}
                 </Stack>
+                <form presentations={product.presentations} product={product.id}>
+                  <Button
+                    colorScheme="blue"
+                    onClick={() => handleSubmit(product.id, presentations)}
+                  >
+                    Actualizar Precio
+                  </Button>
+                </form>
               </Stack>
             </Stack>
           );
