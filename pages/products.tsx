@@ -86,7 +86,7 @@ const ProductsPage: React.FC<Props> = ({products}) => {
                     </Text>
                   </Box>
                 </Flex>
-                <Stack divider={<StackDivider />} spacing={1}>
+                <Stack spacing={1}>
                   {product.presentations.map((presentation, presentationIndex) => {
                     return (
                       <Flex
@@ -98,9 +98,10 @@ const ProductsPage: React.FC<Props> = ({products}) => {
                         <Text flex={0.5} fontSize={[12, 12, 12, 16]}>
                           {presentation.units} unidad(es)
                         </Text>
-                        <Text flex={0.5}>
+                        <Text display="flex" flex={0.5} justifyContent="flex-end" marginTop={2}>
                           <Input
                             placeholder={presentation.price}
+                            w={256}
                             onChange={(e) => {
                               presentation.price = Number(e.target.value);
                               setPresentations(product.presentations);
@@ -111,14 +112,20 @@ const ProductsPage: React.FC<Props> = ({products}) => {
                     );
                   })}
                 </Stack>
-                <form presentations={product.presentations} product={product.id}>
-                  <Button
-                    colorScheme="blue"
-                    onClick={() => handleSubmit(product.id, presentations)}
+                <Stack w="100%">
+                  <form
+                    presentations={product.presentations}
+                    product={product.id}
+                    style={{display: "flex", justifyContent: "flex-end", marginTop: "4px"}}
                   >
-                    Actualizar Precio
-                  </Button>
-                </form>
+                    <Button
+                      colorScheme="blue"
+                      onClick={() => handleSubmit(product.id, presentations)}
+                    >
+                      Actualizar Precio
+                    </Button>
+                  </form>
+                </Stack>
               </Stack>
             </Stack>
           );
