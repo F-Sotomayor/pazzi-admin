@@ -69,7 +69,9 @@ const ProductsPage: React.FC<Props> = ({products}) => {
                     <Text fontSize="2xl" fontWeight={500} lineHeight="normal">
                       {product.title}
                     </Text>
-                    <Text fontSize="lg">{product.test}</Text>
+                    <Text fontSize="lg" textTransform="capitalize">{`Cliente: ${
+                      product.test ? product.test : "Universal"
+                    }`}</Text>
                   </Stack>
                 </Stack>
               </Stack>
