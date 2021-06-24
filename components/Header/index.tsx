@@ -37,14 +37,14 @@ const Header = () => {
         <Link href="/completed">
           <Text color="primary.800" fontSize={20} fontWeight={500}>
             <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px", lg: "15vw"}}>
-              Pedidos Completados
+              Pedidos Confirmados
             </Button>
           </Text>
         </Link>
         <Link href="/daily">
           <Text color="primary.800" fontSize={20} fontWeight={500}>
             <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px", lg: "15vw"}}>
-              Pedidos para Imprimir
+              Pedidos Completados
             </Button>
           </Text>
         </Link>

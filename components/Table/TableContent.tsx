@@ -1,8 +1,23 @@
 import React from "react";
-import {Box, Table, Tbody, Td, Th, Thead, Tr, Text, Badge, Checkbox} from "@chakra-ui/react";
+import {
+  Box,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  Text,
+  Badge,
+  Checkbox,
+  Stack,
+  Heading,
+} from "@chakra-ui/react";
 import {format} from "date-fns";
 
 import {Order} from "../../product/types";
+import order from "../../pages/api/order";
+import {useOrderOverview} from "../../product/hooks";
 
 import {getOrderTotal} from "./selectors";
 
@@ -13,6 +28,8 @@ interface Props {
 }
 
 const TableContent: React.FC<Props> = ({orders, value, onChange}) => {
+  const overview = useOrderOverview(orders);
+
   function handleChange(checked, id) {
     if (checked) {
       onChange(value.concat(id));
@@ -22,70 +39,84 @@ const TableContent: React.FC<Props> = ({orders, value, onChange}) => {
   }
 
   return (
-    <Table colorScheme="blue" marginTop={4} variant="simple">
-      <Thead>
-        <Tr>
-          <Th>Seleccionar</Th>
-          <Th>Email</Th>
-          <Th>Fecha Realizado</Th>
-          <Th>Pedido</Th>
-          <Th>Precio Total</Th>
-          <Th>Estado del pedido</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        {orders.map((order: Order) => {
-          return (
-            <Tr key={order.id}>
-              <Td>
-                <Checkbox
-                  border="1px solid gray"
-                  borderRadius={2}
-                  checked={value.includes(order.id)}
-                  onChange={(event) => handleChange(event.target.checked, order.id)}
-                />
-              </Td>
-              <Td>{order.email}</Td>
-              <Td>{format(order.date, "MM/dd/yyyy / HH:mm:ss")}</Td>
-              <Td>
-                {order.order.map((item) => {
-                  return (
-                    <Box key={item.id}>
-                      <Badge colorScheme="blue" marginY="0.25rem">
-                        {item.title}
-                      </Badge>
-                      {item.presentations.map((presentation, index) => {
-                        return (
-                          <Box key={index}>
-                            <Text>
-                              Pack: {presentation.count} : {presentation.units}
-                            </Text>
-                          </Box>
-                        );
-                      })}
-                    </Box>
-                  );
-                })}
-              </Td>
-              <Td>{getOrderTotal(order)}</Td>
-              <Td>
-                <Badge
-                  alignItems="center"
-                  backgroundColor="green.200"
-                  borderRadius={6}
-                  display="flex"
-                  h="30px"
-                  justifyContent="center"
-                  w="100px"
-                >
-                  {order.status}
-                </Badge>
-              </Td>
-            </Tr>
-          );
-        })}
-      </Tbody>
-    </Table>
+    <>
+      <Table colorScheme="blue" marginTop={4} variant="simple">
+        <Thead>
+          <Tr>
+            <Th>Seleccionar</Th>
+            <Th>Email</Th>
+            <Th>Fecha Realizado</Th>
+            <Th>Pedido</Th>
+            <Th>Precio Total</Th>
+            <Th>Estado del pedido</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {orders.map((order: Order) => {
+            return (
+              <Tr key={order.id}>
+                <Td>
+                  <Checkbox
+                    border="1px solid gray"
+                    borderRadius={2}
+                    checked={value.includes(order.id)}
+                    onChange={(event) => handleChange(event.target.checked, order.id)}
+                  />
+                </Td>
+                <Td>{order.email}</Td>
+                <Td>{format(order.date, "MM/dd/yyyy / HH:mm:ss")}</Td>
+                <Td>
+                  {order.order.map((item) => {
+                    return (
+                      <Box key={item.id}>
+                        {item.presentations.map((presentation, index) => {
+                          if (presentation.count > 0)
+                            return (
+                              <Box key={index}>
+                                <Badge colorScheme="blue" marginY="0.25rem">
+                                  {item.title}
+                                </Badge>
+                                <Text>
+                                  Pack: {presentation.count} : {presentation.units}
+                                </Text>
+                              </Box>
+                            );
+                        })}
+                      </Box>
+                    );
+                  })}
+                </Td>
+                <Td>{getOrderTotal(order)}</Td>
+                <Td>
+                  <Badge
+                    alignItems="center"
+                    backgroundColor="green.200"
+                    borderRadius={6}
+                    display="flex"
+                    h="30px"
+                    justifyContent="center"
+                    w="100px"
+                  >
+                    {order.status}
+                  </Badge>
+                </Td>
+              </Tr>
+            );
+          })}
+        </Tbody>
+      </Table>
+      <Stack h="auto" marginTop={6} textAlign="center" w="100%">
+        <Heading>Resumen</Heading>
+        {overview.map(({title, count}) => (
+          <Box key={title} alignItems="center" display="flex" flexDirection="column">
+            <Badge colorScheme="blue" marginY="0.25rem" w={256}>
+              {title}
+            </Badge>
+            <Box>{count}</Box>
+          </Box>
+        ))}
+      </Stack>
+    </>
   );
 };
 
