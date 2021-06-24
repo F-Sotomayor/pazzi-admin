@@ -102,7 +102,8 @@ const ProductsPage: React.FC<Props> = ({products}) => {
                         </Text>
                         <Text display="flex" flex={0.5} justifyContent="flex-end" marginTop={2}>
                           <Input
-                            placeholder={presentation.price}
+                            placeholder={String(presentation.price)}
+                            type="number"
                             w={256}
                             onChange={(e) => {
                               presentation.price = Number(e.target.value);
@@ -115,11 +116,7 @@ const ProductsPage: React.FC<Props> = ({products}) => {
                   })}
                 </Stack>
                 <Stack w="100%">
-                  <form
-                    presentations={product.presentations}
-                    product={product.id}
-                    style={{display: "flex", justifyContent: "flex-end", marginTop: "4px"}}
-                  >
+                  <form style={{display: "flex", justifyContent: "flex-end", marginTop: "4px"}}>
                     <Button
                       colorScheme="blue"
                       onClick={() => handleSubmit(product.id, presentations)}
