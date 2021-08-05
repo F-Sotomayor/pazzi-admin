@@ -18,6 +18,8 @@ import {format} from "date-fns";
 import {Order} from "../../product/types";
 import order from "../../pages/api/order";
 import {useOrderOverview} from "../../product/hooks";
+import server from "../../product/api/server";
+import client from "../../product/api/client";
 
 import {getOrderTotal} from "./selectors";
 
@@ -87,6 +89,7 @@ const TableContent: React.FC<Props> = ({orders, value, onChange}) => {
                   })}
                 </Td>
                 <Td>{getOrderTotal(order)}</Td>
+
                 <Td>
                   <Badge
                     alignItems="center"

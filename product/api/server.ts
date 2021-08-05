@@ -22,6 +22,19 @@ export default {
 
       return true;
     },
+    update: async (id: string): Promise<boolean> => {
+      // const batch = database.batch();
+
+      // console.log(`Before update` + id, retired);
+
+      // batch.update(database.collection("orders").doc(id), {
+      //   status: retired,
+      // });
+
+      // await batch.commit();
+
+      return true;
+    },
   },
   product: {
     list: async (): Promise<Product[]> => {
