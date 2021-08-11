@@ -25,6 +25,7 @@ export interface Order {
   date: number;
   order: CartItem[];
   email: string;
+  ordernumber: number;
   status: "pending" | "completed" | "cancelled" | "daily";
 }
 

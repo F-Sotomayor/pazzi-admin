@@ -46,6 +46,7 @@ const TableContent: React.FC<Props> = ({orders, value, onChange}) => {
         <Thead>
           <Tr>
             <Th>Seleccionar</Th>
+            <Th>Orden</Th>
             <Th>Email</Th>
             <Th>Fecha Realizado</Th>
             <Th>Pedido</Th>
@@ -65,6 +66,7 @@ const TableContent: React.FC<Props> = ({orders, value, onChange}) => {
                     onChange={(event) => handleChange(event.target.checked, order.id)}
                   />
                 </Td>
+                <Td>{order.ordernumber}</Td>
                 <Td>{order.email}</Td>
                 <Td>{format(order.date, "MM/dd/yyyy / HH:mm:ss")}</Td>
                 <Td>
@@ -77,10 +79,11 @@ const TableContent: React.FC<Props> = ({orders, value, onChange}) => {
                               <Box key={index}>
                                 <Badge colorScheme="blue" marginY="0.25rem">
                                   {item.title}
+                                  {presentation.units > 10
+                                    ? `(Caja de ${presentation.units} panes individuales)`
+                                    : `(Pack de ${presentation.units} unidades)`}
                                 </Badge>
-                                <Text>
-                                  Pack: {presentation.count} : {presentation.units}
-                                </Text>
+                                <Text>{presentation.count * presentation.units}</Text>
                               </Box>
                             );
                         })}
@@ -110,6 +113,7 @@ const TableContent: React.FC<Props> = ({orders, value, onChange}) => {
       </Table>
       <Stack h="auto" marginTop={6} textAlign="center" w="100%">
         <Heading>Resumen</Heading>
+
         {overview.map(({title, count}) => (
           <Box key={title} alignItems="center" display="flex" flexDirection="column">
             <Badge colorScheme="blue" marginY="0.25rem" w={256}>
