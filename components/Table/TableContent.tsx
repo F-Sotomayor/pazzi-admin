@@ -12,6 +12,7 @@ import {
   Checkbox,
   Stack,
   Heading,
+  Flex,
 } from "@chakra-ui/react";
 import {format} from "date-fns";
 
@@ -78,7 +79,7 @@ const TableContent: React.FC<Props> = ({orders, value, onChange}) => {
                             return (
                               <Box key={index}>
                                 <Badge colorScheme="blue" marginY="0.25rem">
-                                  {item.title}
+                                  {item.title2}
                                   {presentation.units > 10
                                     ? `(Caja de ${presentation.units} panes individuales)`
                                     : `(Pack de ${presentation.units} unidades)`}

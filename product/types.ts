@@ -1,6 +1,7 @@
 export interface Product {
   id: string;
   title: string;
+  title2: string;
   description: string;
   stock: number;
   test: string;
@@ -17,6 +18,7 @@ export interface Presentation {
 export interface CartItem {
   id: Product["id"];
   title: Product["title"];
+  title2: Product["title2"];
   presentations: CartItemPresentation[];
 }
 
