@@ -84,7 +84,7 @@ const TableContent: React.FC<Props> = ({orders, value, onChange}) => {
                                     ? `(Caja de ${presentation.units} panes individuales)`
                                     : `(Pack de ${presentation.units} unidades)`}
                                 </Badge>
-                                <Text>{presentation.count * presentation.units}</Text>
+                                <Text>{presentation.count}</Text>
                               </Box>
                             );
                         })}
