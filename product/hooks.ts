@@ -12,7 +12,7 @@ export function useOrderOverview(orders: Order[]): Overview[] {
     const map = orders.reduce<Record<Overview["title"], Overview["count"]>>((map, order) => {
       order.order.forEach((order) => {
         order.presentations.forEach((presentation) => {
-          map[order.title] = (map[order.title] || 0) + presentation.count * presentation.units;
+          map[order.title] = (map[order.title] || 0) + presentation.count;
         });
       });
 

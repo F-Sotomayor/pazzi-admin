@@ -80,9 +80,18 @@ const TableContent: React.FC<Props> = ({orders, value, onChange}) => {
                               <Box key={index}>
                                 <Badge colorScheme="blue" marginY="0.25rem">
                                   {item.title2}
-                                  {presentation.units > 10
-                                    ? `(Caja de ${presentation.units} panes individuales)`
-                                    : `(Pack de ${presentation.units} unidades)`}
+                                  {/* {presentation.units < 10
+                                    ? `(Pack de ${presentation.units} unidades)`
+                                    : `(Pack de ${presentation.units} unidades)`} */}
+                                  (
+                                  {presentation.units < 10
+                                    ? `Pack de ${presentation.units} unidades`
+                                    : presentation.units < 44
+                                    ? `Bandeja de ${presentation.units} unidades`
+                                    : presentation.units < 50
+                                    ? `Caja de ${presentation.units} unidades`
+                                    : `Caja de ${presentation.units} unidades`}
+                                  )
                                 </Badge>
                                 <Text>{presentation.count}</Text>
                               </Box>
