@@ -48,7 +48,7 @@ const TableContent: React.FC<Props> = ({orders, value, onChange}) => {
           <Tr>
             <Th>Seleccionar</Th>
             <Th>Orden</Th>
-            <Th>Email</Th>
+            <Th>Usuario</Th>
             <Th>Fecha Realizado</Th>
             <Th>Pedido</Th>
             <Th>Precio Total</Th>
@@ -68,7 +68,7 @@ const TableContent: React.FC<Props> = ({orders, value, onChange}) => {
                   />
                 </Td>
                 <Td>{order.ordernumber}</Td>
-                <Td>{order.email}</Td>
+                <Td>{order.email.split("@").shift()}</Td>
                 <Td>{format(order.date, "MM/dd/yyyy / HH:mm:ss")}</Td>
                 <Td>
                   {order.order.map((item) => {
