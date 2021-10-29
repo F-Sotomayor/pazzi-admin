@@ -121,18 +121,6 @@ const TableContent: React.FC<Props> = ({orders, value, onChange}) => {
           })}
         </Tbody>
       </Table>
-      <Stack h="auto" marginTop={6} textAlign="center" w="100%">
-        <Heading>Resumen</Heading>
-
-        {overview.map(({title, count}) => (
-          <Box key={title} alignItems="center" display="flex" flexDirection="column">
-            <Badge colorScheme="blue" marginY="0.25rem" w={256}>
-              {title}
-            </Badge>
-            <Box>{count}</Box>
-          </Box>
-        ))}
-      </Stack>
     </>
   );
 };

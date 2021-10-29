@@ -22,35 +22,35 @@ const Header = () => {
       >
         <Link href="/cancelled">
           <Text color="primary.800" fontSize={20} fontWeight={500}>
-            <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px", lg: "15vw"}}>
+            <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px", lg: "10vw"}}>
               Pedidos Cancelados
             </Button>
           </Text>
         </Link>
         <Link href="/pending">
           <Text color="primary.800" fontSize={20} fontWeight={500}>
-            <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px", lg: "15vw"}}>
+            <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px", lg: "10vw"}}>
               Pedidos Pendientes
             </Button>
           </Text>
         </Link>
         <Link href="/completed">
           <Text color="primary.800" fontSize={20} fontWeight={500}>
-            <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px", lg: "15vw"}}>
+            <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px", lg: "10vw"}}>
               Pedidos Confirmados
             </Button>
           </Text>
         </Link>
         <Link href="/daily">
           <Text color="primary.800" fontSize={20} fontWeight={500}>
-            <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px", lg: "15vw"}}>
+            <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px", lg: "10vw"}}>
               Pedidos Completados
             </Button>
           </Text>
         </Link>
         <Link href="/products">
           <Text color="primary.800" fontSize={20} fontWeight={500}>
-            <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px", lg: "15vw"}}>
+            <Button colorScheme="blue" marginY={{base: "0.5rem"}} w={{base: "300px", lg: "10vw"}}>
               Productos
             </Button>
           </Text>
