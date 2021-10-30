@@ -26,6 +26,8 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
         return res.status(200).end();
       })
       .catch((error) => {
+        console.log(error);
+
         return res.status(error).end();
       });
   }

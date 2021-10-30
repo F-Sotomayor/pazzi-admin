@@ -44,8 +44,11 @@ export default {
         .then((snapshot) => snapshot.docs.map((doc) => ({...(doc.data() as Product), id: doc.id})));
     },
     stock: {
-      update: async (id: Product["id"], presentations: Presentation[]): Promise<void> => {
-        database.collection("products").doc(id).update({
+      update: async (
+        id: Product["id"],
+        presentations: Presentation[],
+      ): Promise<FirebaseFirestore.WriteResult> => {
+        return database.collection("products").doc(id).update({
           presentations,
         });
       },
