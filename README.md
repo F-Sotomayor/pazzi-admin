@@ -7,10 +7,13 @@ NOTE: This is a demo version and its not being maintained, might have bugs.
 Installation:
 
 git clone https://github.com/F-Sotomayor/pazzi-admin.git
+
 yarn
+
 yarn dev
 
 Admin User:
 
 Username: goncycapo@gmail.com
+
 Passowrd: goncycapazo
