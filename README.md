@@ -12,6 +12,8 @@ yarn
 
 yarn dev
 
+Live Demo: https://pazzi-admin.vercel.app/
+
 Admin User:
 
 Username: goncycapo@gmail.com
